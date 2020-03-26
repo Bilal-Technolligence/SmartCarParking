@@ -77,60 +77,54 @@ public class FirbaseAuthenticationClass extends AppCompatActivity {
     }
 
 
-    public void RegisterUser(final String userPassword, final String contact, final String name, final String parkingName, final String parkingSpace, final String address, final String userCategory, final String ImagePath, final String userGmail, final CompleteProfileActivity activity, final ProgressDialog progressDialog) {
-        FirebaseAuth.getInstance().createUserWithEmailAndPassword(userGmail, userPassword)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            final String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+    public void RegisterUser(final String userGmail, String userPassword, final String contact, final String name, final String parkingName, final String parkingSpace, final String address, final String userCategory, final Uri imagePath, final CompleteProfileActivity completeProfileActivity, final ProgressDialog progressDialog) {
+      FirebaseAuth.getInstance().createUserWithEmailAndPassword(userGmail,userPassword)
+              .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                  @Override
+                  public void onComplete(@NonNull Task<AuthResult> task) {
+                      if (task.isSuccessful()) {
+                          final String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
-                            StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("images/" + FirebaseDatabase.getInstance().getReference().child("Users").push().getKey());
-                            storageReference.putFile(Uri.parse(ImagePath)).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                                @Override
-                                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                                    Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
-                                    while (!uriTask.isSuccessful()) ;
-                                    Uri downloadUri = uriTask.getResult();
+                          StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("images/" + FirebaseDatabase.getInstance().getReference().child("Users").push().getKey());
+                          storageReference.putFile(imagePath).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                              @Override
+                              public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                  Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
+                                  while (!uriTask.isSuccessful()) ;
+                                  Uri downloadUri = uriTask.getResult();
 
-                                    UserAttr userAttr = new UserAttr();
-                                    userAttr.setName(name);
+                                  UserAttr userAttr = new UserAttr();
+                                  userAttr.setEmail(userGmail);
+                                  userAttr.setContact(contact);
+                                  userAttr.setName(name);
+                                  userAttr.setParkingName(parkingName);
+                                  userAttr.setParkingSpace(parkingSpace);
+                                  userAttr.setCategory(userCategory);
+                                  userAttr.setAddress(address);
+                                  userAttr.setId(uid);
+                                  userAttr.setImageUrl(downloadUri.toString());
+                                  userAttr.setStatus(0);
+                                  reference.child(uid).setValue(userAttr);
+                                  if (userCategory.equals("User"))
+                                      completeProfileActivity.startActivity(new Intent(completeProfileActivity, MainActivity.class));
+                                  else
+                                      completeProfileActivity.startActivity(new Intent(completeProfileActivity, MainActivity.class));
+                                  Toast.makeText(getApplicationContext(), "Account Created", Toast.LENGTH_SHORT).show();
+//                                  getApplicationContext().finish();
+                                  progressDialog.dismiss();
 
-                                    userAttr.setCategory(userCategory);
-//                                    if (userCategory.equals("User"))
-//                                        userAttr.setAge(age);
-//                                    if (userCategory.equals("Service")){
-                                        userAttr.setParkingName(parkingName);
-                                        userAttr.setParkingSpace(parkingSpace);
-                                        userAttr.setContact(contact);
-                                    userAttr.setEmail(userGmail);
-                                    userAttr.setId(uid);
-                                    userAttr.setAddress(address);
-                                    userAttr.setImageUrl(downloadUri.toString());
-                                    userAttr.setStatus(0);
-                                    reference.child(uid).setValue(userAttr);
-                                    if (userCategory.equals("User"))
-                                        activity.startActivity(new Intent(activity, MainActivity.class));
-                                    else
-                                        activity.startActivity(new Intent(activity, MainActivity.class));
-                                    Toast.makeText(activity, "Account Created", Toast.LENGTH_SHORT).show();
-                                    activity.finish();
-                                    progressDialog.dismiss();
-
-                                }
-                            });
+                              }
+                          });
 
 
-                        }
-
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(activity, "" + e.getMessage(), Toast.LENGTH_SHORT).show();
-                progressDialog.dismiss();
-            }
-        });
-
+                      }
+                  }
+              }).addOnFailureListener(new OnFailureListener() {
+          @Override
+          public void onFailure(@NonNull Exception e) {
+              Toast.makeText(completeProfileActivity, "" + e.getMessage(), Toast.LENGTH_SHORT).show();
+              progressDialog.dismiss();
+          }
+      });
     }
 }
