@@ -24,7 +24,7 @@ public class CompleteProfileActivity extends AppCompatActivity {
 CardView btnRegister;
     ProgressDialog progressDialog;
     ImageView profileImage;
-    private String imagePath;
+    private Uri imagePath;
     int count=0;
     private String selection ="User";
     String userName,userGmail,userCategory,userPassword;
@@ -129,10 +129,10 @@ CardView btnRegister;
         if (requestCode==requestCode&&resultCode==resultCode
                 &&data!=null && data.getData()!=null){
 
-            imagePath= String.valueOf(data.getData());
+            imagePath= data.getData();
             try {
 
-                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getApplicationContext().getContentResolver(), Uri.parse(imagePath));
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getApplicationContext().getContentResolver(),imagePath);
                 profileImage.setImageBitmap(bitmap);
                 count=1;
 

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:padding="10dp"
+    android:layout_marginBottom="1dp"
+
+    android:layout_height="wrap_content">
+    <TextView
+        android:id="@+id/ownerName"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_height="wrap_content"
+        android:text="Hamza Khan"
+        android:textSize="35dp"
+        android:textStyle="bold"
+        >
+
+    </TextView>
+    <TextView
+        android:id="@+id/parkingLocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_below="@+id/ownerName"
+        android:text="University Road Abbottabad"
+        android:textSize="17dp"
+        android:textStyle="bold"
+        >
+
+    </TextView>
+    <TextView
+        android:id="@+id/totalSpace"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="15dp"
+        android:layout_width="wrap_content"
+        android:textStyle="bold"
+        android:textSize="19dp"
+        android:layout_height="wrap_content"
+        android:text="Total Space: 100">
+
+    </TextView>
+    <TextView
+        android:id="@+id/filledSpace"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="5dp"
+        android:layout_below="@+id/totalSpace"
+        android:layout_width="wrap_content"
+        android:textStyle="bold"
+        android:textSize="15dp"
+        android:layout_height="wrap_content"
+        android:text="Filled Space: 80">
+
+    </TextView>
+    <TextView
+        android:id="@+id/freeSpace"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="5dp"
+        android:layout_below="@+id/filledSpace"
+        android:layout_width="wrap_content"
+        android:textStyle="bold"
+        android:textSize="15dp"
+        android:layout_height="wrap_content"
+        android:text="Free Space: 20">
+
+    </TextView>
+
+</RelativeLayout>
