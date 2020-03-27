@@ -11,7 +11,8 @@
         android:padding="10dp"
         android:layout_width="140dp"
         android:layout_height="140dp"
-        android:src="@drawable/gglogo"/>
+        android:src="@drawable/gglogo"
+        tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/btnLogin"
