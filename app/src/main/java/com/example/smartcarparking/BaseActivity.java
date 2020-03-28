@@ -21,7 +21,7 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
     TextView name,gmail;
     String eName,eImage;
     ActionBarDrawerToggle drawerToggle;
-    //A
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

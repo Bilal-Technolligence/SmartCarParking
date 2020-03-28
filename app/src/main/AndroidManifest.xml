@@ -13,8 +13,9 @@
         android:roundIcon="@drawable/gglogo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ForgetPassword"></activity>
-        <activity android:name=".ParkingOwnerList"></activity>
+        <activity android:name=".CompleteBookingDetail"></activity>
+        <activity android:name=".ForgetPassword" />
+        <activity android:name=".ParkingOwnerList" />
         <activity
             android:name=".CompleteProfileActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
@@ -23,7 +24,7 @@
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".LoginActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar"></activity>
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".SplashScreen"
             android:theme="@style/Theme.AppCompat.NoActionBar">
