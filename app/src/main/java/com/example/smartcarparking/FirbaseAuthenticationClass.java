@@ -50,7 +50,7 @@ public class FirbaseAuthenticationClass extends AppCompatActivity {
                                     }
                                     else
                                     {
-                                        activity.startActivity(new Intent(activity, MainActivity.class));
+                                        activity.startActivity(new Intent(activity, ServiceMain.class));
                                         activity.finish();
                                         progressDialog.dismiss();
                                     }
@@ -109,9 +109,9 @@ public class FirbaseAuthenticationClass extends AppCompatActivity {
                                   userAttr.setImageUrl(downloadUri.toString());
                                   reference.child(uid).setValue(userAttr);
                                   if (userCategory.equals("User"))
-                                      completeProfileActivity.startActivity(new Intent(completeProfileActivity, MainActivity.class));
+                                      completeProfileActivity.startActivity(new Intent(completeProfileActivity, ServiceMain.class));
                                   else
-                                      completeProfileActivity.startActivity(new Intent(completeProfileActivity, MainActivity.class));
+                                      completeProfileActivity.startActivity(new Intent(completeProfileActivity, ServiceMain.class));
                                   Toast.makeText(completeProfileActivity, "Account Created", Toast.LENGTH_SHORT).show();
 //                                  getApplicationContext().finish();
                                   progressDialog.dismiss();

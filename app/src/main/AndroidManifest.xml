@@ -13,20 +13,18 @@
         android:roundIcon="@drawable/gglogo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ParkingOwnerList">
-
-        </activity>
+        <activity android:name=".AddParking"></activity>
+        <activity android:name=".ServiceMain" />
+        <activity android:name=".ParkingOwnerList" />
         <activity
             android:name=".CompleteProfileActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar"></activity>
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".SignUpActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".LoginActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar">
-
-        </activity>
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".SplashScreen"
             android:theme="@style/Theme.AppCompat.NoActionBar">
