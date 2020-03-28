@@ -5,33 +5,69 @@ public class UserAttr {
     String Name;
     String Email;
     String Contact;
-    String Age;
     String Address;
+    String Latitude;
+    String Longitude;
     String ImageUrl;
     String ParkingName;
     String ParkingSpace;
     String Category;
-    int Status;
+    String Rating;
+    String NumRating;
 
     public UserAttr() {
     }
 
-    public UserAttr(String id, String name, String email, String contact, String age, String address, String imageUrl, String parkingName, String parkingSpace, String category, int status) {
+    public UserAttr(String id, String name, String email, String contact, String address, String latitude, String longitude, String imageUrl, String parkingName, String parkingSpace, String category, String rating, String numRating) {
         Id = id;
         Name = name;
         Email = email;
         Contact = contact;
-        Age = age;
         Address = address;
+        Latitude = latitude;
+        Longitude = longitude;
         ImageUrl = imageUrl;
         ParkingName = parkingName;
         ParkingSpace = parkingSpace;
         Category = category;
-        Status = status;
+        Rating = rating;
+        NumRating = numRating;
+    }
+
+    public String getRating() {
+        return Rating;
+    }
+
+    public void setRating(String rating) {
+        Rating = rating;
+    }
+
+    public String getNumRating() {
+        return NumRating;
+    }
+
+    public void setNumRating(String numRating) {
+        NumRating = numRating;
     }
 
     public String getId() {
         return Id;
+    }
+
+    public String getLatitude() {
+        return Latitude;
+    }
+
+    public void setLatitude(String latitude) {
+        Latitude = latitude;
+    }
+
+    public String getLongitude() {
+        return Longitude;
+    }
+
+    public void setLongitude(String longitude) {
+        Longitude = longitude;
     }
 
     public void setId(String id) {
@@ -39,14 +75,6 @@ public class UserAttr {
     }
     public String getCategory() {
         return Category;
-    }
-
-    public int getStatus() {
-        return Status;
-    }
-
-    public void setStatus(int status) {
-        Status = status;
     }
 
     public void setCategory(String category) {
@@ -75,14 +103,6 @@ public class UserAttr {
 
     public void setContact(String contact) {
         Contact = contact;
-    }
-
-    public String getAge() {
-        return Age;
-    }
-
-    public void setAge(String age) {
-        Age = age;
     }
 
     public String getAddress() {

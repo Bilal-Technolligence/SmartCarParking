@@ -1,7 +1,5 @@
 package com.example.smartcarparking;
 
-import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
@@ -11,7 +9,6 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
 import android.location.Address;
 import android.location.Criteria;
 import android.location.Geocoder;
@@ -22,7 +19,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -36,57 +32,30 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
-public class CompleteProfileActivity extends AppCompatActivity {
+public class AddParking extends AppCompatActivity {
     CardView btnRegister;
     ProgressDialog progressDialog;
     ImageView profileImage;
     private Uri imagePath;
     int count = 0;
-    private String selection = "User";
-    String userName, userGmail, userCategory, userPassword;
     private LocationManager locationManager;
     String provider, lati, loni, addressString;
     Double latitude = 0.0, longitude = 0.0;
     FusedLocationProviderClient mFusedLocationClient;
-    EditText name, contact, age, address, parkingSpace, parkingName;
+    EditText length, width, price;
     final FirbaseAuthenticationClass firbaseAuthenticationClass = new FirbaseAuthenticationClass();
 
-
-    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_complete_profile);
-        userCategory = getIntent().getStringExtra("Category");
-//        if(userCategory.equals("Service"))
-//        {
-//            parkingSpace.setVisibility( View.VISIBLE );
-//            parkingName.setVisibility(View.VISIBLE);
-//            age.setVisibility( View.INVISIBLE );
-//
-//        }
-//        if(userCategory.equals("User")) {
-//            parkingSpace.setVisibility(View.INVISIBLE);
-//            parkingName.setVisibility(View.INVISIBLE);
-//            age.setVisibility(View.VISIBLE);
-//
-//        }
-        userName = getIntent().getStringExtra("Name");
+        setContentView(R.layout.activity_add_parking);
         profileImage = (ImageView) findViewById(R.id.profileImage);
-        name = (EditText) findViewById(R.id.name);
-        //Setting UserName
-        name.setText(String.valueOf(userName));
-        contact = (EditText) findViewById(R.id.contact);
-        age = (EditText) findViewById(R.id.age);
-        //address=(EditText) findViewById(R.id.address);
-        parkingName = (EditText) findViewById(R.id.parkingName);
-        parkingSpace = (EditText) findViewById(R.id.totalParkingSpace);
+        length = (EditText) findViewById(R.id.length);
+        width = (EditText) findViewById(R.id.width);
+        price = (EditText) findViewById(R.id.price);
         btnRegister = (CardView) findViewById(R.id.register);
         progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("Registering..... ");
-        userGmail = getIntent().getStringExtra("Email");
-        userPassword = getIntent().getStringExtra("Password");
-
+        progressDialog.setMessage("Adding parking..... ");
         profileImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -110,7 +79,7 @@ public class CompleteProfileActivity extends AppCompatActivity {
                             lati = (String.valueOf(latitude));
                             loni = (String.valueOf(longitude));
                             //Toast.makeText(getApplicationContext() , lati + " " + loni ,  Toast.LENGTH_LONG).show();
-                            Geocoder geoCoder = new Geocoder(CompleteProfileActivity.this, Locale.getDefault());
+                            Geocoder geoCoder = new Geocoder(AddParking.this, Locale.getDefault());
                             StringBuilder builder = new StringBuilder();
                             try {
                                 List<Address> address = geoCoder.getFromLocation(latitude, longitude, 1);
@@ -146,69 +115,31 @@ public class CompleteProfileActivity extends AppCompatActivity {
                 return;
             }
         }
-        final Location location = locationManager.getLastKnownLocation(provider);
-
-
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String Name = name.getText().toString().toUpperCase();
-                // String Age = age.getText().toString();
-                String Contact = contact.getText().toString();
-                String ParkingSpace = parkingSpace.getText().toString();
-                String ParkingName = parkingName.getText().toString();
-                if (Name.equals("")) {
-                    name.setError("Enter Valid Name");
-                    name.setFocusable(true);
-//                } else if (userCategory.equals("User")&&Age.equals("")) {
-//                    age.setError("Enter Valid Age");
-//                    age.setFocusable(true);
-                } else if (ParkingName.equals("")) {
-                    age.setError("Enter Parking Name");
-                    age.setFocusable(true);
-                } else if (ParkingSpace.equals("")) {
-                    age.setError("Enter Parking Space");
-                    age.setFocusable(true);
-                } else if (Contact.equals("")) {
-                    contact.setError("Enter Valid Contact Number");
-                    contact.setFocusable(true);
+                String Width = width.getText().toString().toUpperCase();
+                String Length = length.getText().toString();
+                String Price = price.getText().toString();
+                if (Width.equals("")) {
+                    width.setError("Enter Valid Name");
+                    width.setFocusable(true);
+                } else if (Length.equals("")) {
+                    length.setError("Enter Parking Name");
+                    length.setFocusable(true);
+                } else if (Price.equals("")) {
+                    price.setError("Enter Parking Space");
+                    price.setFocusable(true);
                 } else if (count == 0) {
                     Snackbar.make(v, "Please Select Image", Snackbar.LENGTH_LONG).show();
                 } else {
                     // progressDialog.show();
-                    firbaseAuthenticationClass.RegisterUser(userGmail, userPassword, Contact, Name, ParkingName, ParkingSpace, userCategory, imagePath, lati, loni, addressString, CompleteProfileActivity.this, progressDialog);
+                  //  firbaseAuthenticationClass.RegisterUser(userGmail, userPassword, Contact, Name, ParkingName, ParkingSpace, userCategory, imagePath, lati, loni, addressString, CompleteProfileActivity.this, progressDialog);
 
                 }
             }
         });
-
     }
 
-    @Override
-    public void onBackPressed() {
-        Intent intent = new Intent(CompleteProfileActivity.this, SignUpActivity.class);
-        startActivity(intent);
-        finish();
-    }
-
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == requestCode && resultCode == resultCode
-                && data != null && data.getData() != null) {
-
-            imagePath = data.getData();
-            try {
-
-                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getApplicationContext().getContentResolver(), imagePath);
-                profileImage.setImageBitmap(bitmap);
-                count = 1;
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-
-        }
-    }
 }
+

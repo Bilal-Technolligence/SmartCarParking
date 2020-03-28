@@ -13,8 +13,8 @@
         android:roundIcon="@drawable/gglogo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".CompleteBookingDetail"></activity>
-        <activity android:name=".ForgetPassword" />
+        <activity android:name=".AddParking"></activity>
+        <activity android:name=".ServiceMain" />
         <activity android:name=".ParkingOwnerList" />
         <activity
             android:name=".CompleteProfileActivity"
