@@ -7,18 +7,19 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class MainActivity extends AppCompatActivity {
-    Button btnReserveParking;
+public class EndCurrentParking extends AppCompatActivity {
+    Button endParking;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        btnReserveParking = findViewById(R.id.btnReserve);
+        setContentView(R.layout.activity_end_current_parking);
+        endParking =findViewById(R.id.btnEndParking);
 
-        btnReserveParking.setOnClickListener(new View.OnClickListener() {
+        endParking.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this,CompleteBookingDetail.class);
+                Intent intent = new Intent(EndCurrentParking.this,PaymentMethod.class);
                 startActivity(intent);
             }
         });
