@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:orientation="vertical"
         android:layout_gravity="center_vertical"
-        android:background="@color/colorGreen"
+        android:background="@color/btnGreen"
         android:layout_height="280dp">
         <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="match_parent"
@@ -69,7 +69,7 @@
         </com.google.android.material.textfield.TextInputEditText>
     </com.google.android.material.textfield.TextInputLayout>
     <androidx.cardview.widget.CardView
-        android:id="@+id/register"
+        android:id="@+id/letspark"
         android:layout_height="55dp"
         android:layout_width="match_parent"
         android:layout_marginTop="30dp"
@@ -89,7 +89,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             android:gravity="center"
-            android:text="Book Now"
+            android:text="Let's Park"
             android:textColor="#ffffff"
             android:textStyle="bold"
             android:textSize="25dp" />

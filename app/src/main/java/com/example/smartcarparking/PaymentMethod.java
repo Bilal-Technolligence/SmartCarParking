@@ -7,19 +7,19 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-public class CompleteBookingDetail extends AppCompatActivity {
-    CardView letsPark;
+public class PaymentMethod extends AppCompatActivity {
+    CardView payByHand;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_complete_booking_detail);
-        letsPark = findViewById(R.id.letspark);
+        setContentView(R.layout.activity_payment_method);
+        payByHand = findViewById(R.id.cardHandPayment);
 
-        letsPark.setOnClickListener(new View.OnClickListener() {
+        payByHand.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(CompleteBookingDetail.this,EndCurrentParking.class);
+                Intent intent = new Intent(PaymentMethod.this,PayAndRateUser.class);
                 startActivity(intent);
             }
         });

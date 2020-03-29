@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".PayAndRateUser">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="15dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:layout_marginTop="10dp"
+
+            android:text="System Calculated Amount"
+            android:textColor="@color/txtGray"
+            android:textSize="20sp"
+            android:textStyle="bold"/>
+        <View
+            android:layout_width="150dp"
+            android:layout_height="1dp"
+            android:background="@color/txtGray"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:layout_marginTop="15dp"
+            android:text="$200.00"
+            android:layout_marginStart="10dp"
+            android:textColor="@color/btnGreen"
+            android:textSize="40dp"
+            android:textStyle="bold"></TextView>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:src="@drawable/cashh"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:layout_marginTop="10dp"
+            android:text="Receipt"
+            android:layout_marginStart="10dp"
+            android:textColor="@color/btnGreen"
+            android:textSize="20sp"/>
+
+    </LinearLayout>
+    <View
+        android:layout_marginTop="25dp"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/txtGray"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="15dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:layout_marginTop="10dp"
+
+            android:text="Rate Your Experience With"
+            android:textColor="@color/txtGray"
+            android:textSize="20sp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:layout_marginTop="15dp"
+            android:text="Veraan Parking"
+            android:layout_marginStart="10dp"
+            android:textColor="@color/btnGreen"
+            android:textSize="25dp"
+            android:textStyle="bold"></TextView>
+
+        <View
+            android:layout_width="150dp"
+            android:layout_height="1dp"
+            android:background="@color/txtGray"/>
+
+    </LinearLayout>
+
+    <RatingBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:numStars = "5"
+        android:layout_marginLeft="5dp"
+        android:id="@+id/ratingBar"
+        android:layout_gravity="center"/>
+    <Button
+        android:id="@+id/btnEndParking"
+        android:layout_width="272dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="120dp"
+        android:background="@drawable/buttonstyle"
+        android:padding="10dp"
+        android:text="Submit"
+        android:textColor="#fff" />
+
+</LinearLayout>
