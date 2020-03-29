@@ -13,7 +13,9 @@
         android:roundIcon="@drawable/gglogo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".PayAndRateUser"></activity>
+        <activity android:name=".ParkingSlotDetail"></activity>
+        <activity android:name=".ViewParkingSlots" />
+        <activity android:name=".PayAndRateUser" />
         <activity android:name=".PaymentMethod" />
         <activity android:name=".EndCurrentParking" />
         <activity android:name=".AddParking" />
@@ -32,10 +34,8 @@
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".SplashScreen"
-            android:theme="@style/Theme.AppCompat.NoActionBar">
-
-        </activity>
-        <activity android:name=".MainActivity" >
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

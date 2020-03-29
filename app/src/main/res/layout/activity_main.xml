@@ -9,13 +9,31 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/drawarLayout">
-   <Button
-       android:id="@+id/btnReserve"
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content"
-       android:text="Reserve Parking"
-       android:textSize="30sp"
-       android:background="@color/colorGreen"/>
+        <fragment
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/fragmentMap"
+            android:name="com.google.android.gms.maps.SupportMapFragment">
+
+
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:fabSize="normal"
+                app:elevation="200dp"
+                android:id="@+id/floatButton"
+                android:layout_gravity="end|bottom"
+                android:backgroundTint="@color/colorPrimary"
+                android:src="@drawable/ic_format_list_bulleted_black_24dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="60dp">
+
+
+            </com.google.android.material.floatingactionbutton.FloatingActionButton>
+
+
+        </fragment>
         <com.google.android.material.navigation.NavigationView
             android:id="@+id/drawerNavigationView"
             android:layout_width="wrap_content"
