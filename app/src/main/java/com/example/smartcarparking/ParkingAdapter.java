@@ -45,6 +45,7 @@ public class ParkingAdapter extends RecyclerView.Adapter<ParkingAdapter.ViewHold
         holder.width.setText(parkAttrs.get(position).getWidth());
         holder.price.setText(parkAttrs.get(position).getPrice());
         holder.status.setText(parkAttrs.get(position).getStatus());
+        holder.title.setText(parkAttrs.get(position).getTitle());
         Picasso.get().load(parkAttrs.get(position).getPic()).into(holder.profile);
         final String id = parkAttrs.get(position).getId();
         holder.deleteBtn.setOnClickListener(new View.OnClickListener() {
@@ -77,7 +78,7 @@ public class ParkingAdapter extends RecyclerView.Adapter<ParkingAdapter.ViewHold
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView deleteBtn, profile;
-        TextView length ,width, price,status;
+        TextView length ,width, price,status,title;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -87,6 +88,7 @@ public class ParkingAdapter extends RecyclerView.Adapter<ParkingAdapter.ViewHold
             width = (TextView) itemView.findViewById(R.id.txtW);
             price = (TextView) itemView.findViewById(R.id.txtPrice);
             status = (TextView) itemView.findViewById(R.id.txtStatus);
+            title = (TextView) itemView.findViewById(R.id.txtTitle);
         }
     }
 }
