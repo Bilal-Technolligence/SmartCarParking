@@ -11,8 +11,26 @@ public class ParkAttr {
     String price;
     String pic;
     String status;
+    String address;
+    String title;
 
-    public ParkAttr(String id, String admin, String name, String length, String width, String latitude, String longitude, String price, String pic, String status) {
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public ParkAttr(String id, String admin, String name, String length, String width, String latitude, String longitude, String price, String pic, String status, String address, String title) {
         this.id = id;
         this.admin = admin;
         this.name = name;
@@ -23,6 +41,8 @@ public class ParkAttr {
         this.price = price;
         this.pic = pic;
         this.status = status;
+        this.address = address;
+        this.title = title;
     }
 
     public String getId() {
