@@ -30,6 +30,25 @@
             android:textSize="25sp" />
 
     </LinearLayout>
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginLeft="40dp"
+        android:layout_height="wrap_content"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:hint="Enter Vechile Name"
+        app:boxStrokeColor="@color/colorWhite"
+        android:textColorHint="@color/colorBlack">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/txtCarName"
+            android:inputType="text"
+            android:textColor="@color/colorBlack"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </com.google.android.material.textfield.TextInputEditText>
+    </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
@@ -42,7 +61,7 @@
         app:boxStrokeColor="@color/colorWhite"
         android:textColorHint="@color/colorBlack">
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/totalParkingSpace"
+            android:id="@+id/txtCarNumber"
             android:inputType="text"
             android:textColor="@color/colorBlack"
             android:layout_width="match_parent"
@@ -61,7 +80,7 @@
         app:boxStrokeColor="@color/colorWhite"
         android:textColorHint="@color/colorBlack">
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/address"
+            android:id="@+id/txtParkingDuration"
             android:textColor="@color/colorBlack"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">

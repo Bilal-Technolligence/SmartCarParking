@@ -34,6 +34,7 @@ android:background="@color/colorGray"
                 android:textSize="20sp"
                 android:textStyle="bold"/>
             <TextView
+                android:id="@+id/txtTotalRent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="left"
@@ -63,6 +64,7 @@ android:background="@color/colorGray"
                 android:textSize="15sp"
                 android:textStyle="bold"></TextView>
             <TextView
+                android:id="@+id/txtTotalDuration"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"

@@ -27,6 +27,7 @@
                 android:src="@drawable/car" />
 
             <TextView
+                android:id="@+id/txtParkingName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Parking Name"
@@ -84,7 +85,7 @@
                         android:padding="15dp">
 
                         <TextView
-                            android:id="@+id/doctorName"
+                            android:id="@+id/txtCarName"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
@@ -95,7 +96,7 @@
                             android:textStyle="bold"></TextView>
 
                         <TextView
-                            android:id="@+id/doctorEmail"
+                            android:id="@+id/txtCarNumber"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
@@ -129,7 +130,7 @@
                         android:textStyle="bold"></TextView>
 
                     <TextView
-                        android:id="@+id/appointmentDate"
+                        android:id="@+id/txtDate"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
@@ -162,7 +163,7 @@
                         android:textStyle="bold"></TextView>
 
                     <TextView
-                        android:id="@+id/appointmentTime"
+                        android:id="@+id/txtStartTime"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
@@ -195,7 +196,7 @@
                         android:textStyle="bold"></TextView>
 
                     <TextView
-                        android:id="@+id/appointmentStatus"
+                        android:id="@+id/txtDuration"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
