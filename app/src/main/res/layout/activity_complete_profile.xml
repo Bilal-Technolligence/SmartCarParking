@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:gravity="center_horizontal"
-    android:background="@drawable/profilebackground"
+    android:background="@drawable/background"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".CompleteProfileActivity">
@@ -125,6 +125,26 @@
 
                 </com.google.android.material.textfield.TextInputEditText>
             </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="40dp"
+                android:layout_marginLeft="40dp"
+                android:layout_height="wrap_content"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:hint="Parking Location"
+                app:boxStrokeColor="@color/colorWhite"
+                android:textColorHint="@color/colorWhite">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txtParkingLocation"
+                    android:inputType="number"
+                    android:textColor="@color/colorBlack"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                </com.google.android.material.textfield.TextInputEditText>
+            </com.google.android.material.textfield.TextInputLayout>
+
             <androidx.cardview.widget.CardView
                 android:id="@+id/register"
                 android:layout_height="55dp"
@@ -137,7 +157,7 @@
                 android:layout_marginLeft="37dp"
                 android:layout_marginRight="37dp"
                 android:layout_marginBottom="0dp"
-                app:cardBackgroundColor="@color/backgroucndGreen">
+                app:cardBackgroundColor="#35CD3B">
 
                 <TextView
                     android:layout_width="wrap_content"
