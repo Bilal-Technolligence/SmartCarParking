@@ -6,15 +6,21 @@ import androidx.cardview.widget.CardView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 public class PaymentMethod extends AppCompatActivity {
     CardView payByHand;
+    TextView totalParkingRent,totalDurationHours;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_payment_method);
         payByHand = findViewById(R.id.cardHandPayment);
+        totalParkingRent = findViewById(R.id.txtTotalRent);
+
+        totalDurationHours = findViewById(R.id.txtTotalDuration);
+
 
         payByHand.setOnClickListener(new View.OnClickListener() {
             @Override

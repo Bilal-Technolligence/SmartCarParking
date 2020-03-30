@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:orientation="vertical"
         android:layout_gravity="center_vertical"
-        android:background="@color/btnGreen"
+        android:background="@drawable/background"
         android:layout_height="280dp">
         <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="match_parent"
@@ -30,6 +30,25 @@
             android:textSize="25sp" />
 
     </LinearLayout>
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginLeft="40dp"
+        android:layout_height="wrap_content"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:hint="Enter Vechile Name"
+        app:boxStrokeColor="@color/colorWhite"
+        android:textColorHint="@color/colorBlack">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/txtCarName"
+            android:inputType="text"
+            android:textColor="@color/colorBlack"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </com.google.android.material.textfield.TextInputEditText>
+    </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
@@ -42,8 +61,9 @@
         app:boxStrokeColor="@color/colorWhite"
         android:textColorHint="@color/colorBlack">
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/totalParkingSpace"
+            android:id="@+id/txtCarNumber"
             android:inputType="text"
+            android:maxLength="7"
             android:textColor="@color/colorBlack"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -61,8 +81,10 @@
         app:boxStrokeColor="@color/colorWhite"
         android:textColorHint="@color/colorBlack">
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/address"
+            android:id="@+id/txtParkingDuration"
             android:textColor="@color/colorBlack"
+            android:inputType="number"
+            android:maxLength="1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -80,7 +102,7 @@
         android:layout_marginLeft="37dp"
         android:layout_marginRight="37dp"
         android:layout_marginBottom="0dp"
-        app:cardBackgroundColor="@color/backgroucndGreen">
+        app:cardBackgroundColor="#35CD3B">
 
         <TextView
             android:layout_width="wrap_content"
