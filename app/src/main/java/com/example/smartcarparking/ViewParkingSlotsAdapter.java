@@ -38,10 +38,10 @@ public class ViewParkingSlotsAdapter extends RecyclerView.Adapter<ViewParkingSlo
         holder.service.setText( parkAttrs.get( position ).getName() );
         holder.company.setText( parkAttrs.get( position ).getAdmin() );
         //holder.location.setText( parkAttrs.get( position ).getLocation() );
-        holder.close.setText( parkAttrs.get( position ).getCloseTime() );
-        holder.rating.setText( String.valueOf( parkAttrs.get( position ).getRating() ) );
-        holder.ratingBar.setRating( Float.valueOf( parkAttrs.get( position ).getRating() ) );
-        holder.total.setText( String.valueOf( parkAttrs.get( position ).getTotal() ) );
+        //holder.close.setText( parkAttrs.get( position ).getCloseTime() );
+        //holder.rating.setText( String.valueOf( parkAttrs.get( position ).getRating() ) );
+       // holder.ratingBar.setRating( Float.valueOf( parkAttrs.get( position ).getRating() ) );
+        //holder.total.setText( String.valueOf( parkAttrs.get( position ).getTotal() ) );
                 holder.itemView.setOnClickListener( new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
