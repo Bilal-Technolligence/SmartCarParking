@@ -1,18 +1,16 @@
 package com.example.smartcarparking;
 
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.drawerlayout.widget.DrawerLayout;
-
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -27,6 +25,11 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 public class MainActivity extends AppCompatActivity implements OnMapReadyCallback {
     private static final int REQUEST_LOCATION = 0;
@@ -45,6 +48,11 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+            recreate();
+            return;
+        }
         setContentView(R.layout.activity_main);
         locationManager = (LocationManager) getSystemService( Context.LOCATION_SERVICE );
         floatingActionButton = (FloatingActionButton) findViewById( R.id.floatButton );
@@ -74,7 +82,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     @Override
     public void onMapReady(final GoogleMap googleMap) {
-        imageView.setVisibility( View.GONE );
+       // imageView.setVisibility( View.GONE );
         locationManager = (LocationManager) getSystemService( Context.LOCATION_SERVICE );
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient( this );
         mFusedLocationClient.getLastLocation()
@@ -96,7 +104,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                             googleMap.animateCamera( CameraUpdateFactory.newLatLngZoom( latLng1, 18 ), 4000, null );
                         } else {
 
-                            Snackbar.make( drawerLayout, "Please allow location to this app", Snackbar.LENGTH_LONG ).show();
+                            Toast.makeText(getApplicationContext(), "Please allow location to this app", Toast.LENGTH_LONG).show();
+
                         }
 
 
