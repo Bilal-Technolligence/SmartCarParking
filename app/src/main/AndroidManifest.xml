@@ -37,11 +37,7 @@
             android:name=".SplashScreen"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity android:name=".MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
         <meta-data
