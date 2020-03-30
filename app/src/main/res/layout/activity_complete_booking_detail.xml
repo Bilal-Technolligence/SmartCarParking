@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:orientation="vertical"
         android:layout_gravity="center_vertical"
-        android:background="@color/btnGreen"
+        android:background="@drawable/background"
         android:layout_height="280dp">
         <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="match_parent"
@@ -99,7 +99,7 @@
         android:layout_marginLeft="37dp"
         android:layout_marginRight="37dp"
         android:layout_marginBottom="0dp"
-        app:cardBackgroundColor="@color/backgroucndGreen">
+        app:cardBackgroundColor="#35CD3B">
 
         <TextView
             android:layout_width="wrap_content"
