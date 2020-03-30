@@ -13,7 +13,8 @@
         android:roundIcon="@drawable/gglogo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ParkingSlotDetail"></activity>
+        <activity android:name=".DirectionOnMap"></activity>
+        <activity android:name=".ParkingSlotDetail" />
         <activity android:name=".ViewParkingSlots" />
         <activity android:name=".PayAndRateUser" />
         <activity android:name=".PaymentMethod" />
@@ -42,6 +43,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />

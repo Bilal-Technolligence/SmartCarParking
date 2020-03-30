@@ -28,7 +28,7 @@ public class ViewParkingSlots extends AppCompatActivity {
         recyclerView = (RecyclerView) findViewById( R.id.recyclerView );
         parkAttrs = new ArrayList<ParkAttr>();
         recyclerView.setLayoutManager( new LinearLayoutManager( this ) );
-        databaseReference.child( "Services" ).orderByChild( "service" ).addValueEventListener( new ValueEventListener() {
+        databaseReference.child( "Parkings" ).orderByChild( "status" ).equalTo("Empty").addValueEventListener( new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 parkAttrs.clear();

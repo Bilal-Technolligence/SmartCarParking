@@ -35,21 +35,20 @@ public class ViewParkingSlotsAdapter extends RecyclerView.Adapter<ViewParkingSlo
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         Picasso.get().load( parkAttrs.get( position ).getPic() ).into( holder.serviceImage );
-        holder.service.setText( parkAttrs.get( position ).getName() );
-        holder.company.setText( parkAttrs.get( position ).getAdmin() );
-        //holder.location.setText( parkAttrs.get( position ).getLocation() );
-        //holder.close.setText( parkAttrs.get( position ).getCloseTime() );
+        holder.company.setText( parkAttrs.get( position ).getName() );
+        holder.location.setText( parkAttrs.get( position ).getAddress() );
+        holder.close.setText( parkAttrs.get( position ).getPrice() );
         //holder.rating.setText( String.valueOf( parkAttrs.get( position ).getRating() ) );
        // holder.ratingBar.setRating( Float.valueOf( parkAttrs.get( position ).getRating() ) );
         //holder.total.setText( String.valueOf( parkAttrs.get( position ).getTotal() ) );
                 holder.itemView.setOnClickListener( new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        String serviceId = null;
-                        serviceId = parkAttrs.get( position ).getId();
-
+                        String id = null;
+                        id = parkAttrs.get( position ).getId();
                         Intent i = new Intent( activity, ParkingSlotDetail.class );
-                        i.putExtra( "Id", serviceId );
+                        i.putExtra( "adminId", parkAttrs.get(position).getAdmin() );
+                        i.putExtra( "Id", id );
                         activity.startActivity( i );
 
                     }
@@ -69,13 +68,9 @@ public class ViewParkingSlotsAdapter extends RecyclerView.Adapter<ViewParkingSlo
         public ViewHolder(@NonNull View itemView) {
             super( itemView );
             serviceImage = itemView.findViewById( R.id.imgService );
-            service = itemView.findViewById( R.id.txtService );
             company = itemView.findViewById( R.id.txtCompany );
             location = itemView.findViewById( R.id.txtLocation );
             close = itemView.findViewById( R.id.txtCloseTime );
-            ratingBar = itemView.findViewById( R.id.postRating );
-            rating = itemView.findViewById( R.id.txtRating );
-            total = itemView.findViewById( R.id.txtTotalRating );
 
         }
     }
