@@ -1,5 +1,7 @@
 package com.example.smartcarparking;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
@@ -9,6 +11,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.location.Address;
 import android.location.Criteria;
 import android.location.Geocoder;
@@ -26,11 +29,23 @@ import android.widget.Toast;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
+
+import okhttp3.MultipartBody.Part;
 
 public class AddParking extends AppCompatActivity {
     CardView btnRegister;
@@ -39,11 +54,12 @@ public class AddParking extends AppCompatActivity {
     private Uri imagePath;
     int count = 0;
     private LocationManager locationManager;
-    String provider, lati, loni, addressString;
+    String provider, lati, loni, addressString, name;
     Double latitude = 0.0, longitude = 0.0;
     FusedLocationProviderClient mFusedLocationClient;
-    EditText length, width, price;
-    final FirbaseAuthenticationClass firbaseAuthenticationClass = new FirbaseAuthenticationClass();
+    EditText length, width, price, title;
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    final DatabaseReference reference = database.getReference();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +69,7 @@ public class AddParking extends AppCompatActivity {
         length = (EditText) findViewById(R.id.length);
         width = (EditText) findViewById(R.id.width);
         price = (EditText) findViewById(R.id.price);
+        title = (EditText) findViewById(R.id.parkingName);
         btnRegister = (CardView) findViewById(R.id.register);
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Adding parking..... ");
@@ -118,9 +135,10 @@ public class AddParking extends AppCompatActivity {
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String Width = width.getText().toString().toUpperCase();
-                String Length = length.getText().toString();
-                String Price = price.getText().toString();
+                final String Width = width.getText().toString();
+                final String Length = length.getText().toString();
+                final String Price = price.getText().toString();
+                final String Title = title.getText().toString();
                 if (Width.equals("")) {
                     width.setError("Enter Valid Name");
                     width.setFocusable(true);
@@ -133,13 +151,81 @@ public class AddParking extends AppCompatActivity {
                 } else if (count == 0) {
                     Snackbar.make(v, "Please Select Image", Snackbar.LENGTH_LONG).show();
                 } else {
-                    // progressDialog.show();
-                  //  firbaseAuthenticationClass.RegisterUser(userGmail, userPassword, Contact, Name, ParkingName, ParkingSpace, userCategory, imagePath, lati, loni, addressString, CompleteProfileActivity.this, progressDialog);
+                    progressDialog.show();
+                    final String uid = FirebaseAuth.getInstance().getCurrentUser().getUid().toString();
+                    reference.child("Users").child(uid).addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            if (dataSnapshot.exists()) {
+                                name = dataSnapshot.child("name").getValue().toString();
+                            }
+                        }
 
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
+                    final String id = FirebaseDatabase.getInstance().getReference().child("Parkings").push().getKey();
+                    StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("images/" + id);
+                    storageReference.putFile(imagePath).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
+                            while (!uriTask.isSuccessful()) ;
+                            Uri downloadUri = uriTask.getResult();
+
+                            ParkAttr parkAttr = new ParkAttr();
+                            parkAttr.setLength(Length);
+                            parkAttr.setWidth(Width);
+                            parkAttr.setName(name);
+                            parkAttr.setAddress(addressString);
+                            parkAttr.setLatitude(lati);
+                            parkAttr.setLongitude(loni);
+                            parkAttr.setPrice(Price);
+                            parkAttr.setId(id);
+                            parkAttr.setAdmin(uid);
+                            parkAttr.setTitle(Title);
+                            parkAttr.setStatus("Empty");
+                            parkAttr.setPic(downloadUri.toString());
+                            reference.child("Parkings").child(id).setValue(parkAttr);
+                            startActivity(new Intent(AddParking.this, ServiceMain.class));
+                            Toast.makeText(AddParking.this, "Parking added", Toast.LENGTH_SHORT).show();
+                            progressDialog.dismiss();
+                            finish();
+                        }
+                    });
                 }
             }
         });
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(AddParking.this, ServiceMain.class);
+        startActivity(intent);
+        finish();
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == requestCode && resultCode == resultCode
+                && data != null && data.getData() != null) {
+
+            imagePath = data.getData();
+            try {
+
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getApplicationContext().getContentResolver(), imagePath);
+                profileImage.setImageBitmap(bitmap);
+                count = 1;
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+
+        }
+    }
 }
 

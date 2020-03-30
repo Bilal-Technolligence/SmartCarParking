@@ -34,10 +34,12 @@
                 android:layout_marginLeft="40dp"
                 android:layout_height="wrap_content"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:hint="Enter Length"
+                android:hint="Enter Length in meters"
                 android:textColorHint="@color/colorWhite">
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/length"
+                    android:inputType="number"
+                    android:maxLength="3"
                     android:textColor="@color/colorBlack"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
@@ -52,32 +54,12 @@
                 android:layout_marginLeft="40dp"
                 android:layout_height="wrap_content"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:hint="Enter Width"
+                android:hint="Enter Width in meters"
                 app:boxStrokeColor="@color/colorWhite"
                 android:textColorHint="@color/colorWhite">
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/width"
-                    android:inputType="number"
-                    android:textColor="@color/colorBlack"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                </com.google.android.material.textfield.TextInputEditText>
-
-            </com.google.android.material.textfield.TextInputLayout>
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="40dp"
-                android:layout_marginLeft="40dp"
-                android:layout_height="wrap_content"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:hint="Price per hour"
-                android:visibility="gone"
-                app:boxStrokeColor="@color/colorWhite"
-                android:textColorHint="@color/colorWhite">
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/price"
+                    android:maxLength="3"
                     android:inputType="number"
                     android:textColor="@color/colorBlack"
                     android:layout_width="match_parent"
@@ -105,6 +87,27 @@
 
                 </com.google.android.material.textfield.TextInputEditText>
             </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="40dp"
+                android:layout_marginLeft="40dp"
+                android:layout_height="wrap_content"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:hint="Price per hour"
+                app:boxStrokeColor="@color/colorWhite"
+                android:textColorHint="@color/colorWhite">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/price"
+                    android:inputType="number"
+                    android:maxLength="4"
+                    android:textColor="@color/colorBlack"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                </com.google.android.material.textfield.TextInputEditText>
+            </com.google.android.material.textfield.TextInputLayout>
+
             <androidx.cardview.widget.CardView
                 android:id="@+id/register"
                 android:layout_height="55dp"
