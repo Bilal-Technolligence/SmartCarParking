@@ -51,7 +51,7 @@ public class EndCurrentParking extends AppCompatActivity {
         if (currentTime.equals(String.valueOf(parkTime)+1*60*1000)){
             Toast.makeText(this, "Done", Toast.LENGTH_SHORT).show();
         }
-        final String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        final String userId = "asd";//FirebaseAuth.getInstance().getCurrentUser().getUid();
     //    final String userId ="1234";
 
         databaseReference.child("Bookings").child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
