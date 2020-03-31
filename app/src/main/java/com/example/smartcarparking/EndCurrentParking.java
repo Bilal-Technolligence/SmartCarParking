@@ -51,20 +51,21 @@ public class EndCurrentParking extends AppCompatActivity {
         if (currentTime.equals(String.valueOf(parkTime)+1*60*1000)){
             Toast.makeText(this, "Done", Toast.LENGTH_SHORT).show();
         }
-        final String userId = "asd";//FirebaseAuth.getInstance().getCurrentUser().getUid();
+        final String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
     //    final String userId ="1234";
 
         databaseReference.child("Bookings").child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
-                    parkingName.setText(dataSnapshot.child("ParkingName").getValue().toString());
-                    carName.setText(dataSnapshot.child("CarName").getValue().toString());
-                    carNumber.setText(dataSnapshot.child("CarNumber").getValue().toString());
+                    String carname=dataSnapshot.child("CarName").getValue().toString();
+                    String carnumber=dataSnapshot.child("CarNumber").getValue().toString();
+                    carName.setText(carname);
+                    carNumber.setText(carnumber);
                     parkingDuration =dataSnapshot.child("ParkingDuration").getValue().toString();
-                    Rent =dataSnapshot.child("Rent").getValue().toString();
-                    duration.setText(parkingDuration+" Hours");
-                    perHourRent.setText("Rs."+Rent+"/h");
+                   // Rent =dataSnapshot.child("Rent").getValue().toString();
+//                    duration.setText(parkingDuration+" Hours");
+//                    perHourRent.setText("Rs."+Rent+"/h");
 
 
                     parkingTime.setText(dataSnapshot.child("Time").getValue().toString());
