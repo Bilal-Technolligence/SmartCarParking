@@ -41,10 +41,9 @@ public class ParkingAdapter extends RecyclerView.Adapter<ParkingAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
-        holder.length.setText(parkAttrs.get(position).getLength());
-        holder.width.setText(parkAttrs.get(position).getWidth());
+        holder.slots.setText(parkAttrs.get(position).getSlots());
+        holder.available.setText(parkAttrs.get(position).getAvailable());
         holder.price.setText(parkAttrs.get(position).getPrice());
-        holder.status.setText(parkAttrs.get(position).getStatus());
         holder.title.setText(parkAttrs.get(position).getTitle());
         Picasso.get().load(parkAttrs.get(position).getPic()).into(holder.profile);
         final String id = parkAttrs.get(position).getId();
@@ -78,16 +77,15 @@ public class ParkingAdapter extends RecyclerView.Adapter<ParkingAdapter.ViewHold
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView deleteBtn, profile;
-        TextView length ,width, price,status,title;
+        TextView slots, price,available,title;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             deleteBtn = (ImageView) itemView.findViewById(R.id.imgDelete);
             profile = (ImageView) itemView.findViewById(R.id.imgProfile);
-            length = (TextView) itemView.findViewById(R.id.txtL);
-            width = (TextView) itemView.findViewById(R.id.txtW);
+            slots = (TextView) itemView.findViewById(R.id.txtSlots);
+            available = (TextView) itemView.findViewById(R.id.txtAvailable);
             price = (TextView) itemView.findViewById(R.id.txtPrice);
-            status = (TextView) itemView.findViewById(R.id.txtStatus);
             title = (TextView) itemView.findViewById(R.id.txtTitle);
         }
     }
