@@ -3,6 +3,8 @@ package com.example.smartcarparking;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -23,7 +25,7 @@ import java.util.Locale;
 
 public class EndCurrentParking extends AppCompatActivity {
     Button endParking,cancelParking;
-    String Rent,parkingDuration;
+    String Rent,parkingDuration,ParkingTime;
     TextView parkingName,carName,carNumber,duration,parkingTime,parkingDate,perHourRent;
     FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     DatabaseReference databaseReference = firebaseDatabase.getReference();
@@ -48,9 +50,9 @@ public class EndCurrentParking extends AppCompatActivity {
         String currentTime = new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new Date());
         String  parkTime ="9:02:10";
 
-        if (currentTime.equals(String.valueOf(parkTime)+1*60*1000)){
-            Toast.makeText(this, "Done", Toast.LENGTH_SHORT).show();
-        }
+
+
+
         final String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
     //    final String userId ="1234";
 
@@ -65,8 +67,7 @@ public class EndCurrentParking extends AppCompatActivity {
                     Rent =dataSnapshot.child("Rent").getValue().toString();
                     duration.setText(parkingDuration+" Hours");
                     perHourRent.setText("Rs."+Rent+"/h");
-
-
+                    ParkingTime =dataSnapshot.child("Time").getValue().toString();
                     parkingTime.setText(dataSnapshot.child("Time").getValue().toString());
                     parkingDate.setText(dataSnapshot.child("Date").getValue().toString());
                 }
@@ -79,7 +80,20 @@ public class EndCurrentParking extends AppCompatActivity {
         });
 
 
+//        long diff =Integer.valueOf(currentTime)-Integer.valueOf(ParkingTime);
+//        long diffSeconds = diff / 1000;
+//        Toast.makeText(this, "Time "+diffSeconds, Toast.LENGTH_SHORT).show();
 
+        if(currentTime>parkTime*1000)
+        {
+            cancelParking.setVisibility(View.INVISIBLE);
+            endParking.setVisibility(View.VISIBLE);
+        }
+        else {
+            cancelParking.setVisibility(View.VISIBLE);
+            endParking.setVisibility(View.INVISIBLE);
+
+        }
         endParking.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -89,6 +103,29 @@ public class EndCurrentParking extends AppCompatActivity {
 
 
                 startActivity(intent);
+            }
+        });
+
+        cancelParking.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getApplicationContext());
+                alertDialogBuilder.setMessage("Are you sure to remove parking?").setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+                        DatabaseReference databaseReference = firebaseDatabase.getReference();
+                        databaseReference.child("Bookings").child(userId).setValue(null);
+                        dialog.dismiss();
+                        Intent intent = new Intent(EndCurrentParking.this,MainActivity.class);
+                        startActivity(intent);
+                    }
+                }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                }).show();
             }
         });
     }
