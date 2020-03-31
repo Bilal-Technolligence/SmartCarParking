@@ -17,26 +17,14 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Size    "
+            android:text="Slots    "
             android:textSize="30dp"
             android:textColor="#000"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="30dp"
-            android:id="@+id/txtL"
-            android:textColor="#000"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="  x  "
-            android:textSize="30dp"
-            android:textColor="#000"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="30dp"
-            android:id="@+id/txtW"
+            android:id="@+id/txtSlots"
             android:textColor="#000"/>
     </LinearLayout>
     <LinearLayout
@@ -83,14 +71,14 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Status    "
+            android:text="Available    "
             android:textSize="30dp"
             android:textColor="#000"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="30dp"
-            android:id="@+id/txtStatus"
+            android:id="@+id/txtAvailable"
             android:textColor="#000"/>
     </LinearLayout>
     <ImageView

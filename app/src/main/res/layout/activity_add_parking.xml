@@ -27,25 +27,6 @@
                 android:layout_marginTop="50dp"
                 android:layout_height="130dp"
                 android:src="@drawable/profilepic" />
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_marginTop="25dp"
-                android:layout_marginRight="40dp"
-                android:layout_marginLeft="40dp"
-                android:layout_height="wrap_content"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:hint="Enter Length in meters"
-                android:textColorHint="@color/colorWhite">
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/length"
-                    android:inputType="number"
-                    android:maxLength="3"
-                    android:textColor="@color/colorBlack"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                </com.google.android.material.textfield.TextInputEditText>
-            </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
@@ -54,11 +35,11 @@
                 android:layout_marginLeft="40dp"
                 android:layout_height="wrap_content"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:hint="Enter Width in meters"
+                android:hint="Enter Total Slots"
                 app:boxStrokeColor="@color/colorWhite"
                 android:textColorHint="@color/colorWhite">
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/width"
+                    android:id="@+id/Slots"
                     android:maxLength="3"
                     android:inputType="number"
                     android:textColor="@color/colorBlack"

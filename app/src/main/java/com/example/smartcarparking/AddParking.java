@@ -57,7 +57,7 @@ public class AddParking extends AppCompatActivity {
     String provider, lati, loni, addressString, name;
     Double latitude = 0.0, longitude = 0.0;
     FusedLocationProviderClient mFusedLocationClient;
-    EditText length, width, price, title;
+    EditText slots, price, title;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     final DatabaseReference reference = database.getReference();
 
@@ -66,8 +66,7 @@ public class AddParking extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_parking);
         profileImage = (ImageView) findViewById(R.id.profileImage);
-        length = (EditText) findViewById(R.id.length);
-        width = (EditText) findViewById(R.id.width);
+        slots = (EditText) findViewById(R.id.Slots);
         price = (EditText) findViewById(R.id.price);
         title = (EditText) findViewById(R.id.parkingName);
         btnRegister = (CardView) findViewById(R.id.register);
@@ -135,17 +134,13 @@ public class AddParking extends AppCompatActivity {
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final String Width = width.getText().toString();
-                final String Length = length.getText().toString();
+                final String Slots = slots.getText().toString();
                 final String Price = price.getText().toString();
                 final String Title = title.getText().toString();
-                if (Width.equals("")) {
-                    width.setError("Enter Valid Name");
-                    width.setFocusable(true);
-                } else if (Length.equals("")) {
-                    length.setError("Enter Parking Name");
-                    length.setFocusable(true);
-                } else if (Price.equals("")) {
+                if (Slots.equals("")) {
+                    slots.setError("Enter Valid Name");
+                    slots.setFocusable(true);
+                }  else if (Price.equals("")) {
                     price.setError("Enter Parking Space");
                     price.setFocusable(true);
                 } else if (count == 0) {
@@ -176,8 +171,7 @@ public class AddParking extends AppCompatActivity {
                             Uri downloadUri = uriTask.getResult();
 
                             ParkAttr parkAttr = new ParkAttr();
-                            parkAttr.setLength(Length);
-                            parkAttr.setWidth(Width);
+                            parkAttr.setSlots(Slots);
                             parkAttr.setName(name);
                             parkAttr.setAddress(addressString);
                             parkAttr.setLatitude(lati);
@@ -186,6 +180,7 @@ public class AddParking extends AppCompatActivity {
                             parkAttr.setId(id);
                             parkAttr.setAdmin(uid);
                             parkAttr.setTitle(Title);
+                            parkAttr.setAvailable(Slots);
                             parkAttr.setStatus("Empty");
                             parkAttr.setPic(downloadUri.toString());
                             reference.child("Parkings").child(id).setValue(parkAttr);
