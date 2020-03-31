@@ -10,6 +10,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
+        android:id="@+id/secondRelative"
         android:layout_height="wrap_content"
         android:orientation="vertical">
         <LinearLayout
@@ -237,27 +238,38 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="350dp"
+        android:layout_below="@+id/secondRelative"
         android:orientation="vertical">
+        <Button
+            android:id="@+id/btnDirection"
+            android:layout_width="272dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/buttonstyle"
+            android:padding="10dp"
+            android:text="Direction to Parking"
+            android:textColor="#fff" />
 
         <Button
             android:id="@+id/btnEndParking"
             android:layout_width="272dp"
             android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:layout_marginTop="245dp"
             android:background="@drawable/buttonstyle"
             android:padding="10dp"
+            android:layout_marginTop="10dp"
             android:visibility="gone"
             android:text="End Parking"
             android:textColor="#fff" />
+
 
         <Button
             android:id="@+id/btnCancelParking"
             android:layout_width="272dp"
             android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:layout_marginTop="245dp"
+            android:layout_marginTop="10dp"
             android:background="@drawable/buttonstyle"
             android:padding="10dp"
             android:text="Cancel Parking"

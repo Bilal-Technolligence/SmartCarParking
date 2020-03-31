@@ -103,6 +103,28 @@ public class CompleteBookingDetail extends AppCompatActivity {
                     databaseReference.child("Bookings").child(currentUser).child("Time").setValue(currentTime);
                     databaseReference.child("Bookings").child(currentUser).child("ParkingSlotId").setValue(ParkingSlot);
                     progressDialog.dismiss();
+                    databaseReference.child("Parkings").child(ParkingSlot).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            if(dataSnapshot.exists()){
+                                int availableSlots=Integer.parseInt(dataSnapshot.child("available").getValue().toString());
+                                availableSlots=availableSlots-1;
+                                databaseReference.child("Parkings").child(ParkingSlot).child("available").setValue(String.valueOf(availableSlots));
+//                                if(availableSlots==0){
+//                                    databaseReference.child("Parkings").child(ParkingSlot).child("status").setValue("Full");
+//                                }else{
+//                                    databaseReference.child("Parkings").child(ParkingSlot).child("status").setValue("Empty");
+//                                }
+                            }
+
+
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
                     Intent intent = new Intent(CompleteBookingDetail.this,EndCurrentParking.class);
                     startActivity(intent);
                 }

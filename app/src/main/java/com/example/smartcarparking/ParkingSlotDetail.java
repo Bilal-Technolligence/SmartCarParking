@@ -100,7 +100,7 @@ public class ParkingSlotDetail extends AppCompatActivity {
                 if (dataSnapshot.exists()) {
                     ParkAttr parkAttr = dataSnapshot.getValue( ParkAttr.class );
                     if (parkAttr != null) {
-                        service.setText(parkAttr.getName());
+                        service.setText(parkAttr.getTitle());
                        // company.setText(addService.getCompanyName());
                         location.setText(parkAttr.getAddress());
                        // contact.setText(addService.getPhone());

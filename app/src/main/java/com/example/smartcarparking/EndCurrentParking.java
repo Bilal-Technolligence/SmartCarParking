@@ -22,10 +22,11 @@ import java.util.Date;
 import java.util.Locale;
 
 public class EndCurrentParking extends AppCompatActivity {
-    Button endParking,cancelParking;
+    Button endParking,cancelParking,directionParking;
     String Rent,parkingDuration;
     TextView parkingName,carName,carNumber,duration,parkingTime,parkingDate,perHourRent;
     FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+    String longitude, latitude;
     DatabaseReference databaseReference = firebaseDatabase.getReference();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +35,7 @@ public class EndCurrentParking extends AppCompatActivity {
 
         endParking =findViewById(R.id.btnEndParking);
         cancelParking =findViewById(R.id.btnEndParking);
+        directionParking =findViewById(R.id.btnDirection);
 
         parkingName = findViewById(R.id.txtParkingName);
 
@@ -54,6 +56,7 @@ public class EndCurrentParking extends AppCompatActivity {
         final String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
     //    final String userId ="1234";
 
+
         databaseReference.child("Bookings").child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -64,12 +67,30 @@ public class EndCurrentParking extends AppCompatActivity {
                     carNumber.setText(carnumber);
                     parkingDuration =dataSnapshot.child("ParkingDuration").getValue().toString();
                    // Rent =dataSnapshot.child("Rent").getValue().toString();
-//                    duration.setText(parkingDuration+" Hours");
+                    duration.setText(parkingDuration+" Hours");
 //                    perHourRent.setText("Rs."+Rent+"/h");
 
 
                     parkingTime.setText(dataSnapshot.child("Time").getValue().toString());
                     parkingDate.setText(dataSnapshot.child("Date").getValue().toString());
+                    String parkingId=dataSnapshot.child("ParkingSlotId").getValue().toString();
+                    databaseReference.child("Parkings").child(parkingId).addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            if(dataSnapshot.exists()){
+                                parkingName.setText(dataSnapshot.child("title").getValue().toString());
+                                perHourRent.setText("Rs. "+dataSnapshot.child("price").getValue().toString()+" /h");
+                                longitude = dataSnapshot.child("longitude").getValue().toString();
+                                latitude = dataSnapshot.child("latitude").getValue().toString();
+
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
                 }
             }
 
@@ -79,7 +100,15 @@ public class EndCurrentParking extends AppCompatActivity {
             }
         });
 
-
+        directionParking.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(EndCurrentParking.this, DirectionOnMap.class);
+                intent.putExtra("Latitude", latitude);
+                intent.putExtra("Longitude", longitude);
+                startActivity(intent);
+            }
+        });
 
         endParking.setOnClickListener(new View.OnClickListener() {
             @Override
