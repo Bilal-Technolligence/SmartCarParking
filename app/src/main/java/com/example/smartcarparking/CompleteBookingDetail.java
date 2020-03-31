@@ -110,11 +110,7 @@ public class CompleteBookingDetail extends AppCompatActivity {
                                 int availableSlots=Integer.parseInt(dataSnapshot.child("available").getValue().toString());
                                 availableSlots=availableSlots-1;
                                 databaseReference.child("Parkings").child(ParkingSlot).child("available").setValue(String.valueOf(availableSlots));
-//                                if(availableSlots==0){
-//                                    databaseReference.child("Parkings").child(ParkingSlot).child("status").setValue("Full");
-//                                }else{
-//                                    databaseReference.child("Parkings").child(ParkingSlot).child("status").setValue("Empty");
-//                                }
+//                              
                             }
 
 
