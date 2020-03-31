@@ -53,15 +53,20 @@ public class CompleteBookingDetail extends AppCompatActivity {
 
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Booking Submitting..... ");
-        Intent i = getIntent();
-        ParkingSlot = i.getStringExtra("parkingSlotId");
+//        Intent i = getIntent();
+//        ParkingSlot = i.getStringExtra("parkingSlotId");
+        ParkingSlot = "-M3dlUHGgbWnIE9UU-GN";
 
-        databaseReference.child("Parkings").child(ParkingSlot).addListenerForSingleValueEvent(new ValueEventListener() {
+        databaseReference.child("Parkings").child(ParkingSlot).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
-                    parkingName.setText(dataSnapshot.child("name").getValue().toString());
-                    ParkingRent= dataSnapshot.child("price").getValue().toString();
+                    ParkAttr parkAttr = dataSnapshot.getValue( ParkAttr.class );
+                    if (parkAttr != null) {
+                        parkingName.setText(parkAttr.getName());
+                        ParkingRent =String.valueOf( parkAttr.getPrice());
+
+                    }
                 }
             }
 
@@ -81,7 +86,9 @@ public class CompleteBookingDetail extends AppCompatActivity {
                 String CarName =carName.getText().toString();
                 String CarNumber = carNumber.getText().toString();
                 String ParkingDuration = parkingDuration.getText().toString();
-                String ParkingName = parkingName.getText().toString();
+//                String ParkingName = parkingName.getText().toString();
+                String ParkingName ="Veeran Parking";
+                String ParkingPrice = "12";
 
 //                dateFormat = new SimpleDateFormat("kk:mm");
 //                currentTime = dateFormat.format(calendar.getTime());
@@ -99,17 +106,19 @@ public class CompleteBookingDetail extends AppCompatActivity {
                     parkingDuration.setError("Please Fill Parking Duration");
                 }
                 else{
-                    final String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                    progressDialog.show();
+
+//                    final String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                    final String userId ="1234";
                     final String push = FirebaseDatabase.getInstance().getReference().child("booking").push().getKey();
                     databaseReference.child("Bookings").child(push).child("ParkingName").setValue(ParkingName);
                     databaseReference.child("Bookings").child(push).child("uid").setValue(userId);
                     databaseReference.child("Bookings").child(push).child("CarName").setValue(carName.toString());
                     databaseReference.child("Bookings").child(push).child("CarNumber").setValue(carNumber.toString());
-                    databaseReference.child("Bookings").child(push).child("Rent").setValue(ParkingRent);
+                    databaseReference.child("Bookings").child(push).child("Rent").setValue(ParkingPrice);
                     databaseReference.child("Bookings").child(push).child("ParkingDuration").setValue(parkingDuration.toString());
                     databaseReference.child("Bookings").child(push).child("Time").setValue(currentDate);
-                    databaseReference.child("Bookings").child(push).child("Date").setValue(currentDate);
-                    databaseReference.child("Bookings").child(push).child("uid").setValue(userId);
+                    databaseReference.child("Bookings").child(push).child("Date").setValue(currentTime);
                     progressDialog.dismiss();
                     Intent intent = new Intent(CompleteBookingDetail.this,EndCurrentParking.class);
                     startActivity(intent);

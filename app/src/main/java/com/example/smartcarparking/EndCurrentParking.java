@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -16,8 +17,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 public class EndCurrentParking extends AppCompatActivity {
-    Button endParking;
+    Button endParking,cancelParking;
     String Rent,parkingDuration;
     TextView parkingName,carName,carNumber,duration,parkingTime,parkingDate,perHourRent;
     FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
@@ -28,6 +33,8 @@ public class EndCurrentParking extends AppCompatActivity {
         setContentView(R.layout.activity_end_current_parking);
 
         endParking =findViewById(R.id.btnEndParking);
+        cancelParking =findViewById(R.id.btnEndParking);
+
         parkingName = findViewById(R.id.txtParkingName);
 
         carName = findViewById(R.id.txtCarName);
@@ -37,7 +44,15 @@ public class EndCurrentParking extends AppCompatActivity {
         parkingTime = findViewById(R.id.txtStartTime);
         parkingDate = findViewById(R.id.txtDate);
 
+        String currentDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
+        String currentTime = new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new Date());
+        String  parkTime ="9:02:10";
+
+        if (currentTime.equals(String.valueOf(parkTime)+1*60*1000)){
+            Toast.makeText(this, "Done", Toast.LENGTH_SHORT).show();
+        }
         final String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+    //    final String userId ="1234";
 
         databaseReference.child("Bookings").child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -48,7 +63,7 @@ public class EndCurrentParking extends AppCompatActivity {
                     carNumber.setText(dataSnapshot.child("CarNumber").getValue().toString());
                     parkingDuration =dataSnapshot.child("ParkingDuration").getValue().toString();
                     Rent =dataSnapshot.child("Rent").getValue().toString();
-                    duration.setText(parkingDuration.toString());
+                    duration.setText(parkingDuration+" Hours");
                     perHourRent.setText("Rs."+Rent+"/h");
 
 
@@ -62,6 +77,8 @@ public class EndCurrentParking extends AppCompatActivity {
 
             }
         });
+
+
 
         endParking.setOnClickListener(new View.OnClickListener() {
             @Override

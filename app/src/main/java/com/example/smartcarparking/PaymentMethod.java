@@ -8,9 +8,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 public class PaymentMethod extends AppCompatActivity {
     CardView payByHand;
     TextView totalParkingRent,totalDurationHours;
+    DatabaseReference dref= FirebaseDatabase.getInstance().getReference();
+
     String Rent,parkingDuration;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +33,11 @@ public class PaymentMethod extends AppCompatActivity {
         payByHand.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+//                final String push = FirebaseDatabase.getInstance().getReference().child("History").push().getKey();
+//                dref.child("Issues").child(push).child("id").setValue(push);
+//                dref.child("Issues").child(push).child("X").setValue("abcd");
                 Intent intent = new Intent(PaymentMethod.this,PayAndRateUser.class);
+
                 startActivity(intent);
             }
         });

@@ -248,7 +248,19 @@
             android:layout_marginTop="245dp"
             android:background="@drawable/buttonstyle"
             android:padding="10dp"
+            android:visibility="gone"
             android:text="End Parking"
+            android:textColor="#fff" />
+
+        <Button
+            android:id="@+id/btnCancelParking"
+            android:layout_width="272dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginTop="245dp"
+            android:background="@drawable/buttonstyle"
+            android:padding="10dp"
+            android:text="Cancel Parking"
             android:textColor="#fff" />
     </LinearLayout>
 </RelativeLayout>

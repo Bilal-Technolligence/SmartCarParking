@@ -17,12 +17,23 @@
         <activity android:name=".ParkingSlotDetail" />
         <activity android:name=".ViewParkingSlots" />
         <activity android:name=".PayAndRateUser" />
-        <activity android:name=".PaymentMethod" />
-        <activity android:name=".EndCurrentParking" />
+        <activity android:name=".PaymentMethod" >
+
+
+        </activity>
+        <activity android:name=".EndCurrentParking" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".AddParking" />
         <activity android:name=".ServiceMain" />
         <activity android:name=".ParkingOwnerList" />
-        <activity android:name=".CompleteBookingDetail" />
+        <activity android:name=".CompleteBookingDetail">
+
+        </activity>
         <activity android:name=".ForgetPassword" />
         <activity
             android:name=".CompleteProfileActivity"

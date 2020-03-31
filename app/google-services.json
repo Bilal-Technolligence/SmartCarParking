@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "844577457912-dab2gdsfhj5sgrhtvv3f3j4sd6md2r9k.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.smartcarparking",
+            "certificate_hash": "47c63c92ab5b7c8a6ce70a4382046164d76a0312"
+          }
+        },
+        {
           "client_id": "844577457912-crudkuq23aso87isqivgrf2nhopen4h6.apps.googleusercontent.com",
           "client_type": 3
         }
