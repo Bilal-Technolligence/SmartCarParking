@@ -12,6 +12,30 @@ public class ParkAttr {
     String available;
     String address;
     String title;
+    String status;
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public ParkAttr(String id, String admin, String name, String slots, String latitude, String longitude, String price, String pic, String available, String address, String title, String status) {
+        this.id = id;
+        this.admin = admin;
+        this.name = name;
+        this.slots = slots;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.price = price;
+        this.pic = pic;
+        this.available = available;
+        this.address = address;
+        this.title = title;
+        this.status = status;
+    }
 
     public String getAddress() {
         return address;
@@ -29,19 +53,6 @@ public class ParkAttr {
         this.title = title;
     }
 
-    public ParkAttr(String id, String admin, String name, String slots, String latitude, String longitude, String price, String pic, String available, String address, String title) {
-        this.id = id;
-        this.admin = admin;
-        this.name = name;
-        this.slots = slots;
-        this.latitude = latitude;
-        this.longitude = longitude;
-        this.price = price;
-        this.pic = pic;
-        this.available = available;
-        this.address = address;
-        this.title = title;
-    }
 
     public String getId() {
         return id;

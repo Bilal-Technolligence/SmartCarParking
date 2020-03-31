@@ -181,6 +181,7 @@ public class AddParking extends AppCompatActivity {
                             parkAttr.setAdmin(uid);
                             parkAttr.setTitle(Title);
                             parkAttr.setAvailable(Slots);
+                            parkAttr.setStatus("Empty");
                             parkAttr.setPic(downloadUri.toString());
                             reference.child("Parkings").child(id).setValue(parkAttr);
                             startActivity(new Intent(AddParking.this, ServiceMain.class));
