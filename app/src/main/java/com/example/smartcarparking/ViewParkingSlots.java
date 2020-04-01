@@ -28,14 +28,19 @@ public class ViewParkingSlots extends AppCompatActivity {
         recyclerView = (RecyclerView) findViewById( R.id.recyclerView );
         parkAttrs = new ArrayList<ParkAttr>();
         recyclerView.setLayoutManager( new LinearLayoutManager( this ) );
-        databaseReference.child( "Parkings" ).orderByChild( "status" ).equalTo("Empty").addValueEventListener( new ValueEventListener() {
+        databaseReference.child( "Parkings" ).addValueEventListener( new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 parkAttrs.clear();
                 //profiledata.clear();
                 for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
-                    ParkAttr p = dataSnapshot1.getValue( ParkAttr.class );
-                    parkAttrs.add( p );
+                    if(dataSnapshot1.child("available").getValue().toString().equals("0")){
+
+                    }else{
+                        ParkAttr p = dataSnapshot1.getValue( ParkAttr.class );
+                        parkAttrs.add( p );
+                    }
+
                 }
                     recyclerView.setAdapter( new ViewParkingSlotsAdapter( parkAttrs, ViewParkingSlots.this ) );
 

@@ -3,8 +3,6 @@ package com.example.smartcarparking;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -24,10 +22,11 @@ import java.util.Date;
 import java.util.Locale;
 
 public class EndCurrentParking extends AppCompatActivity {
-    Button endParking,cancelParking;
-    String Rent,parkingDuration,ParkingTime;
+    Button endParking,cancelParking,directionParking;
+    String Rent,parkingDuration;
     TextView parkingName,carName,carNumber,duration,parkingTime,parkingDate,perHourRent;
     FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+    String longitude, latitude;
     DatabaseReference databaseReference = firebaseDatabase.getReference();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +35,7 @@ public class EndCurrentParking extends AppCompatActivity {
 
         endParking =findViewById(R.id.btnEndParking);
         cancelParking =findViewById(R.id.btnEndParking);
+        directionParking =findViewById(R.id.btnDirection);
 
         parkingName = findViewById(R.id.txtParkingName);
 
@@ -50,26 +50,47 @@ public class EndCurrentParking extends AppCompatActivity {
         String currentTime = new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new Date());
         String  parkTime ="9:02:10";
 
-
-
-
+        if (currentTime.equals(String.valueOf(parkTime)+1*60*1000)){
+            Toast.makeText(this, "Done", Toast.LENGTH_SHORT).show();
+        }
         final String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
     //    final String userId ="1234";
+
 
         databaseReference.child("Bookings").child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
-                    parkingName.setText(dataSnapshot.child("ParkingName").getValue().toString());
-                    carName.setText(dataSnapshot.child("CarName").getValue().toString());
-                    carNumber.setText(dataSnapshot.child("CarNumber").getValue().toString());
+                    String carname=dataSnapshot.child("CarName").getValue().toString();
+                    String carnumber=dataSnapshot.child("CarNumber").getValue().toString();
+                    carName.setText(carname);
+                    carNumber.setText(carnumber);
                     parkingDuration =dataSnapshot.child("ParkingDuration").getValue().toString();
-                    Rent =dataSnapshot.child("Rent").getValue().toString();
+                   // Rent =dataSnapshot.child("Rent").getValue().toString();
                     duration.setText(parkingDuration+" Hours");
-                    perHourRent.setText("Rs."+Rent+"/h");
-                    ParkingTime =dataSnapshot.child("Time").getValue().toString();
+//                    perHourRent.setText("Rs."+Rent+"/h");
+
+
                     parkingTime.setText(dataSnapshot.child("Time").getValue().toString());
                     parkingDate.setText(dataSnapshot.child("Date").getValue().toString());
+                    String parkingId=dataSnapshot.child("ParkingSlotId").getValue().toString();
+                    databaseReference.child("Parkings").child(parkingId).addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            if(dataSnapshot.exists()){
+                                parkingName.setText(dataSnapshot.child("title").getValue().toString());
+                                perHourRent.setText("Rs. "+dataSnapshot.child("price").getValue().toString()+" /h");
+                                longitude = dataSnapshot.child("longitude").getValue().toString();
+                                latitude = dataSnapshot.child("latitude").getValue().toString();
+
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
                 }
             }
 
@@ -79,21 +100,16 @@ public class EndCurrentParking extends AppCompatActivity {
             }
         });
 
+        directionParking.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(EndCurrentParking.this, DirectionOnMap.class);
+                intent.putExtra("Latitude", latitude);
+                intent.putExtra("Longitude", longitude);
+                startActivity(intent);
+            }
+        });
 
-//        long diff =Integer.valueOf(currentTime)-Integer.valueOf(ParkingTime);
-//        long diffSeconds = diff / 1000;
-//        Toast.makeText(this, "Time "+diffSeconds, Toast.LENGTH_SHORT).show();
-
-        if(currentTime>parkTime*1000)
-        {
-            cancelParking.setVisibility(View.INVISIBLE);
-            endParking.setVisibility(View.VISIBLE);
-        }
-        else {
-            cancelParking.setVisibility(View.VISIBLE);
-            endParking.setVisibility(View.INVISIBLE);
-
-        }
         endParking.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -103,29 +119,6 @@ public class EndCurrentParking extends AppCompatActivity {
 
 
                 startActivity(intent);
-            }
-        });
-
-        cancelParking.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getApplicationContext());
-                alertDialogBuilder.setMessage("Are you sure to remove parking?").setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-
-                        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-                        DatabaseReference databaseReference = firebaseDatabase.getReference();
-                        databaseReference.child("Bookings").child(userId).setValue(null);
-                        dialog.dismiss();
-                        Intent intent = new Intent(EndCurrentParking.this,MainActivity.class);
-                        startActivity(intent);
-                    }
-                }).setNegativeButton("No", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                }).show();
             }
         });
     }
