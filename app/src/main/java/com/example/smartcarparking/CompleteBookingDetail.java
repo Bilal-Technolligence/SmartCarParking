@@ -122,6 +122,7 @@ public class CompleteBookingDetail extends AppCompatActivity {
                         }
                     });
                     Intent intent = new Intent(CompleteBookingDetail.this,EndCurrentParking.class);
+                    intent.putExtra("parkingId",ParkingSlot);
                     startActivity(intent);
                 }
 
