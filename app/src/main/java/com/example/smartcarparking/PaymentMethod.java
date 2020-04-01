@@ -20,7 +20,7 @@ public class PaymentMethod extends AppCompatActivity {
     CardView payByHand;
     TextView totalParkingRent,totalDurationHours;
     DatabaseReference dref= FirebaseDatabase.getInstance().getReference();
-
+    int totalAmount;
     String Rent,parkingDuration;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,15 +33,14 @@ public class PaymentMethod extends AppCompatActivity {
         Intent intent = getIntent();
         Rent = intent.getStringExtra("rent");
         parkingDuration = intent.getStringExtra("duration");
-
+         totalAmount = Integer.valueOf( Rent) * Integer.valueOf(parkingDuration);
+        totalParkingRent.setText(totalAmount);
 
         payByHand.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                final String push = FirebaseDatabase.getInstance().getReference().child("History").push().getKey();
-//                dref.child("Issues").child(push).child("id").setValue(push);
-//                dref.child("Issues").child(push).child("X").setValue("abcd");
                 Intent intent = new Intent(PaymentMethod.this,PayAndRateUser.class);
+                intent.putExtra( "total",totalAmount);
 
                 startActivity(intent);
             }

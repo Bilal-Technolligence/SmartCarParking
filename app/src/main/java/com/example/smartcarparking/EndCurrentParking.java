@@ -48,14 +48,11 @@ public class EndCurrentParking extends AppCompatActivity {
 
         String currentDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
         String currentTime = new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new Date());
-        String  parkTime ="9:02:10";
 
-        if (currentTime.equals(String.valueOf(parkTime)+1*60*1000)){
-            Toast.makeText(this, "Done", Toast.LENGTH_SHORT).show();
-        }
+//        if (currentTime.equals(String.valueOf(parkTime)+1*60*1000)){
+//            Toast.makeText(this, "Done", Toast.LENGTH_SHORT).show();
+//        }
         final String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-    //    final String userId ="1234";
-
 
         databaseReference.child("Bookings").child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
