@@ -46,7 +46,7 @@ public class EndCurrentParking extends AppCompatActivity {
         parkingTime = findViewById(R.id.txtStartTime);
         parkingDate = findViewById(R.id.txtDate);
         Intent i = getIntent();
-        ParkingSlot = i.getStringExtra("parkingSlotId");
+        ParkingSlot = i.getStringExtra("parkingId");
         String currentDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
         String currentTime = new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new Date());
 
@@ -133,6 +133,8 @@ public class EndCurrentParking extends AppCompatActivity {
                 Intent intent = new Intent(EndCurrentParking.this,PaymentMethod.class);
                 intent.putExtra( "duration",parkingDuration);
                 intent.putExtra( "rent",Rent);
+                intent.putExtra("parkingId",ParkingSlot);
+
 
 
                 startActivity(intent);
