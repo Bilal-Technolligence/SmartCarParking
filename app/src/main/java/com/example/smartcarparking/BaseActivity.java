@@ -1,5 +1,6 @@
 package com.example.smartcarparking;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,6 +15,13 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public abstract class BaseActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     DrawerLayout drawerLayout;
@@ -21,6 +29,8 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
     TextView name,gmail;
     String eName,eImage;
     ActionBarDrawerToggle drawerToggle;
+    FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+    DatabaseReference databaseReference = firebaseDatabase.getReference();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -59,9 +69,8 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         switch (menuItem.getItemId()) {
             case R.id.home: {
-//                startActivity(new Intent(this,HomeActivity.class));
-//                finish();
-                Snackbar.make(drawerLayout, "You click home", Snackbar.LENGTH_LONG).show();
+                startActivity(new Intent(this,MainActivity.class));
+                finish();
 
                 break;
             }
@@ -72,6 +81,33 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
 
                 break;
             }
+            case R.id.currentParking: {
+
+
+                final String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+                databaseReference.child("Bookings").child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if (dataSnapshot.exists()) {
+                            startActivity(new Intent(getApplicationContext(),EndCurrentParking.class));
+                            finish();
+                        }
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+
+                Snackbar.make(drawerLayout, "Currently you noting have to Park", Snackbar.LENGTH_LONG).show();
+
+                break;
+
+            }
+
             case R.id.history: {
 //                startActivity(new Intent(this,HistoryActivity.class));
 //                finish();
@@ -90,11 +126,10 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
 //                FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
 //                final String uid = currentUser.getUid();
 //                if (uid != null)
-//                    dref.child("Active").child(uid).setValue(null);
-//
-//                startActivity(new Intent(this,LoginActivity.class));
-//                finish();
-                Snackbar.make(drawerLayout, "You click logout", Snackbar.LENGTH_LONG).show();
+//                    databaseReference.child("Active").child(uid).setValue(null);
+
+                startActivity(new Intent(this,LoginActivity.class));
+                finish();
                 break;
 
             }
