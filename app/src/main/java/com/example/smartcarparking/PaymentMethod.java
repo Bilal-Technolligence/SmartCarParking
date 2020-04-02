@@ -7,16 +7,21 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 public class PaymentMethod extends AppCompatActivity {
     CardView payByHand;
     TextView totalParkingRent,totalDurationHours;
     DatabaseReference dref= FirebaseDatabase.getInstance().getReference();
-
-    String Rent,parkingDuration;
+    int totalAmount;
+    String Rent,parkingDuration,parkingSlot;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,16 +32,19 @@ public class PaymentMethod extends AppCompatActivity {
         totalDurationHours = findViewById(R.id.txtTotalDuration);
         Intent intent = getIntent();
         Rent = intent.getStringExtra("rent");
+        parkingSlot = intent.getStringExtra("parkingId");
+
         parkingDuration = intent.getStringExtra("duration");
-
-
+         totalAmount = Integer.valueOf( Rent) * Integer.valueOf(parkingDuration);
+        totalParkingRent.setText(totalAmount);
+        totalDurationHours.setText(parkingDuration+" h");
         payByHand.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                final String push = FirebaseDatabase.getInstance().getReference().child("History").push().getKey();
-//                dref.child("Issues").child(push).child("id").setValue(push);
-//                dref.child("Issues").child(push).child("X").setValue("abcd");
                 Intent intent = new Intent(PaymentMethod.this,PayAndRateUser.class);
+                intent.putExtra( "total",totalAmount);
+                intent.putExtra( "parkingId",parkingSlot);
+
 
                 startActivity(intent);
             }

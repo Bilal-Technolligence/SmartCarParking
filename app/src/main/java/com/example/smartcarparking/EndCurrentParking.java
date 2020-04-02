@@ -26,7 +26,7 @@ public class EndCurrentParking extends AppCompatActivity {
     String Rent,parkingDuration;
     TextView parkingName,carName,carNumber,duration,parkingTime,parkingDate,perHourRent;
     FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-    String longitude, latitude;
+    String longitude, latitude,ParkingSlot;
     DatabaseReference databaseReference = firebaseDatabase.getReference();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,17 +45,15 @@ public class EndCurrentParking extends AppCompatActivity {
         perHourRent = findViewById(R.id.txtperHourRent);
         parkingTime = findViewById(R.id.txtStartTime);
         parkingDate = findViewById(R.id.txtDate);
-
+        Intent i = getIntent();
+        ParkingSlot = i.getStringExtra("parkingId");
         String currentDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
         String currentTime = new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new Date());
-        String  parkTime ="9:02:10";
 
-        if (currentTime.equals(String.valueOf(parkTime)+1*60*1000)){
-            Toast.makeText(this, "Done", Toast.LENGTH_SHORT).show();
-        }
+//        if (currentTime.equals(String.valueOf(parkTime)+1*60*1000)){
+//            Toast.makeText(this, "Done", Toast.LENGTH_SHORT).show();
+//        }
         final String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-    //    final String userId ="1234";
-
 
         databaseReference.child("Bookings").child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -113,9 +111,30 @@ public class EndCurrentParking extends AppCompatActivity {
         endParking.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                databaseReference.child("Parkings").child(ParkingSlot).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if(dataSnapshot.exists()){
+                            int availableSlots=Integer.parseInt(dataSnapshot.child("available").getValue().toString());
+                            availableSlots=availableSlots+1;
+                            databaseReference.child("Parkings").child(ParkingSlot).child("available").setValue(String.valueOf(availableSlots));
+//
+                        }
+
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
                 Intent intent = new Intent(EndCurrentParking.this,PaymentMethod.class);
                 intent.putExtra( "duration",parkingDuration);
                 intent.putExtra( "rent",Rent);
+                intent.putExtra("parkingId",ParkingSlot);
+
 
 
                 startActivity(intent);
