@@ -109,14 +109,17 @@
             android:background="@color/txtGray"/>
 
     </LinearLayout>
-
-    <RatingBar
-        android:layout_width="wrap_content"
+    <Button
+        android:id="@+id/btnRate"
+        android:layout_width="272dp"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@drawable/buttonstyle"
+        android:padding="10dp"
+        android:text="Rate Us"
+        android:textColor="#fff"
         android:numStars = "5"
-        android:layout_marginLeft="5dp"
-        android:id="@+id/txttotalRating"
-        android:layout_gravity="center"/>
+        android:layout_marginLeft="5dp"/>
     <Button
         android:id="@+id/btnSubmit"
         android:layout_width="272dp"

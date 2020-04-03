@@ -33,7 +33,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
-public class MainActivity extends AppCompatActivity implements OnMapReadyCallback {
+public class MainActivity extends BaseActivity implements OnMapReadyCallback {
     private static final int REQUEST_LOCATION = 0;
     LocationManager locationManager;
     DatabaseReference dref = FirebaseDatabase.getInstance().getReference();
@@ -44,7 +44,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     String lati, loni;
     Double latitude = 0.0, longitude = 0.0;
     FloatingActionButton floatingActionButton;
-    ActionBarDrawerToggle drawerToggle;
     FusedLocationProviderClient mFusedLocationClient;
     String usr = null;
     @RequiresApi(api = Build.VERSION_CODES.P)
@@ -56,7 +55,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             recreate();
             return;
         }
-        setContentView(R.layout.activity_main);
+//        setContentView(R.layout.activity_main);
         locationManager = (LocationManager) getSystemService( Context.LOCATION_SERVICE );
         floatingActionButton = (FloatingActionButton) findViewById( R.id.floatButton );
         //opening map fragment
@@ -81,6 +80,11 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 //                startActivity(intent);
 //            }
 //        });
+    }
+
+    @Override
+    protected int getContentViewId() {
+        return R.layout.activity_main;
     }
 
     @Override

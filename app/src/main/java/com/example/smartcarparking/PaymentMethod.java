@@ -31,12 +31,12 @@ public class PaymentMethod extends AppCompatActivity {
 
         totalDurationHours = findViewById(R.id.txtTotalDuration);
         Intent intent = getIntent();
-        Rent = intent.getStringExtra("rent");
+       Rent = intent.getStringExtra("rent");
         parkingSlot = intent.getStringExtra("parkingId");
 
         parkingDuration = intent.getStringExtra("duration");
          totalAmount = Integer.valueOf( Rent) * Integer.valueOf(parkingDuration);
-        totalParkingRent.setText(totalAmount);
+        totalParkingRent.setText(String.valueOf(totalAmount));
         totalDurationHours.setText(parkingDuration+" h");
         payByHand.setOnClickListener(new View.OnClickListener() {
             @Override

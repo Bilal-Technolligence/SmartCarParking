@@ -159,13 +159,13 @@ public class ParkingSlotDetail extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        reviewBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ShowDialog();
-
-            }
-        });
+//        reviewBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                ShowDialog();
+//
+//            }
+//        });
         databaseReference.child("Rating").child(adminId).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

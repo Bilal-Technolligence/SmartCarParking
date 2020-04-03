@@ -45,7 +45,7 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
         drawerLayout.addDrawerListener(drawerToggle);
         drawerToggle.syncState();
         //navbar item click
-        NavigationView navigationView = (NavigationView) findViewById(R.id.navigationView);
+        NavigationView navigationView = (NavigationView) findViewById(R.id.drawerNavigationView);
         navigationView.setNavigationItemSelectedListener(this);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         //header click navbar
@@ -93,6 +93,9 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
                             startActivity(new Intent(getApplicationContext(),EndCurrentParking.class));
                             finish();
                         }
+                        else{
+                            Snackbar.make(drawerLayout, "No record found", Snackbar.LENGTH_LONG).show();
+                        }
 
                     }
 
@@ -102,7 +105,7 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
                     }
                 });
 
-                Snackbar.make(drawerLayout, "Currently you noting have to Park", Snackbar.LENGTH_LONG).show();
+                //Snackbar.make(drawerLayout, "Currently you noting have to Park", Snackbar.LENGTH_LONG).show();
 
                 break;
 

@@ -259,7 +259,6 @@
             android:background="@drawable/buttonstyle"
             android:padding="10dp"
             android:layout_marginTop="10dp"
-            android:visibility="gone"
             android:text="End Parking"
             android:textColor="#fff" />
 
