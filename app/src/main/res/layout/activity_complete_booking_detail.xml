@@ -6,119 +6,133 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".CompleteBookingDetail">
-
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
     <LinearLayout
         android:layout_width="match_parent"
-        android:orientation="vertical"
-        android:layout_gravity="center_vertical"
-        android:background="@drawable/background"
-        android:layout_height="280dp">
-        <androidx.appcompat.widget.AppCompatImageView
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="160dp"
-            android:layout_marginTop="60dp"
-            android:layout_gravity="center"
-            android:src="@drawable/car" />
-        <TextView
-            android:id="@+id/parkingName"
-            android:layout_width="wrap_content"
+            android:layout_height="280dp"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/background"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="match_parent"
+                android:layout_height="160dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="60dp"
+                android:src="@drawable/car" />
+
+            <TextView
+                android:id="@+id/parkingName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Smart Car Parking"
+                android:textColor="#ffffff"
+                android:textSize="25sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Smart Car Parking"
-            android:layout_gravity="center"
-            android:textColor="#ffffff"
-            android:textStyle="bold"
-            android:textSize="25sp" />
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="40dp"
+            android:hint="Enter Vechile Name"
+            android:textColorHint="@color/colorBlack"
+            app:boxStrokeColor="@color/colorWhite">
 
-    </LinearLayout>
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_marginTop="30dp"
-        android:layout_marginRight="40dp"
-        android:layout_marginLeft="40dp"
-        android:layout_height="wrap_content"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:hint="Enter Vechile Name"
-        app:boxStrokeColor="@color/colorWhite"
-        android:textColorHint="@color/colorBlack">
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/txtCarName"
-            android:inputType="text"
-            android:textColor="@color/colorBlack"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtCarName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:textColor="@color/colorBlack">
+
+            </com.google.android.material.textfield.TextInputEditText>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-        </com.google.android.material.textfield.TextInputEditText>
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_marginTop="30dp"
-        android:layout_marginRight="40dp"
-        android:layout_marginLeft="40dp"
-        android:layout_height="wrap_content"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:hint="Enter Vechile Number"
-        app:boxStrokeColor="@color/colorWhite"
-        android:textColorHint="@color/colorBlack">
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/txtCarNumber"
-            android:inputType="text"
-            android:maxLength="7"
-            android:textColor="@color/colorBlack"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-        </com.google.android.material.textfield.TextInputEditText>
-    </com.google.android.material.textfield.TextInputLayout>
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="40dp"
-        android:layout_marginLeft="40dp"
-        android:layout_height="wrap_content"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:hint="Enter Duration"
-        app:boxStrokeColor="@color/colorWhite"
-        android:textColorHint="@color/colorBlack">
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/txtParkingDuration"
-            android:textColor="@color/colorBlack"
-            android:inputType="number"
-            android:maxLength="1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-        </com.google.android.material.textfield.TextInputEditText>
-    </com.google.android.material.textfield.TextInputLayout>
-    <androidx.cardview.widget.CardView
-        android:id="@+id/letspark"
-        android:layout_height="55dp"
-        android:layout_width="match_parent"
-        android:layout_marginTop="30dp"
-        app:cardElevation="60dp"
-        app:cardCornerRadius="10dp"
-        android:padding="10dp"
-        android:layout_gravity="center"
-        android:layout_marginLeft="37dp"
-        android:layout_marginRight="37dp"
-        android:layout_marginBottom="0dp"
-        app:cardBackgroundColor="#35CD3B">
-
-        <TextView
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="120dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="40dp"
+            android:hint="Enter Vechile Number"
+            android:textColorHint="@color/colorBlack"
+            app:boxStrokeColor="@color/colorWhite">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtCarNumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:maxLength="7"
+                android:textColor="@color/colorBlack">
+
+            </com.google.android.material.textfield.TextInputEditText>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
             android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:gravity="center"
-            android:text="Let's Park"
-            android:textColor="#ffffff"
-            android:textStyle="bold"
-            android:textSize="25dp" />
+            android:layout_marginRight="40dp"
+            android:hint="Enter Duration"
+            android:textColorHint="@color/colorBlack"
+            app:boxStrokeColor="@color/colorWhite">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtParkingDuration"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:maxLength="1"
+                android:textColor="@color/colorBlack">
+
+            </com.google.android.material.textfield.TextInputEditText>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/letspark"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="37dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="37dp"
+            android:layout_marginBottom="0dp"
+            android:padding="10dp"
+            app:cardBackgroundColor="#35CD3B"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="60dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="120dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:gravity="center"
+                android:text="Let's Park"
+                android:textColor="#ffffff"
+                android:textSize="25dp"
+                android:textStyle="bold" />
 
 
-
-
-    </androidx.cardview.widget.CardView>
-
+        </androidx.cardview.widget.CardView>
+    </LinearLayout>
+</ScrollView>
 </LinearLayout>

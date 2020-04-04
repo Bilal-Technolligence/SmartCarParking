@@ -126,6 +126,8 @@ public class PayAndRateUser extends AppCompatActivity {
                                 .setValue(rating_attr);
 
                         dialog.dismiss();
+                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                        finish();
                     }
                 }).setNegativeButton("Cancel",
                 new DialogInterface.OnClickListener() {
